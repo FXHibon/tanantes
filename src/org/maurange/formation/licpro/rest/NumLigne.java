@@ -1,15 +1,15 @@
 package org.maurange.formation.licpro.rest;
 
 public class NumLigne {
-	private String numLigne;
+    private String numLigne;
 
-	public String getNumLigne() {
-		return numLigne;
-	}
+    public String getNumLigne() {
+        return numLigne;
+    }
 
-	public void setNumLigne(String numLigne) {
-		this.numLigne = numLigne;
-	}
-	
+    public void setNumLigne(String numLigne) {
+        this.numLigne = numLigne;
+    }
+
 
 }

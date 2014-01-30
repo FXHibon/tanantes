@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * @author Michenux
- *
  */
 public class ListArret extends ArrayList<Arret> {
 
