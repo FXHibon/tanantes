@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TPLicencePro</string>
+    <string name="arret_rest_url">https://www.tan.fr/ewp/arrets.json?output={format}&amp;latitude={latitude}&amp;longitude={longitude}</string>
+
+</resources>
