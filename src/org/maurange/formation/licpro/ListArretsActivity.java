@@ -32,6 +32,7 @@ public class ListArretsActivity extends ListActivity {
         for (int i = 0; i < 10; i++) {
             tmp = new Arret();
             tmp.setLibelle("Libelle: " + i);
+            tmp.setCodeLieu("CodeLieu");
             data.add(tmp);
         }
 
