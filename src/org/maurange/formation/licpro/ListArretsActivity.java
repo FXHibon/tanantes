@@ -2,9 +2,7 @@ package org.maurange.formation.licpro;
 
 import java.util.ArrayList;
 
-import org.maurange.formation.licpro.rest.Arret;
-import org.maurange.formation.licpro.rest.ArretRestMethod;
-import org.maurange.formation.licpro.rest.ListArret;
+import org.maurange.formation.licpro.rest.*;
 
 
 import android.app.ListActivity;
@@ -26,13 +24,22 @@ public class ListArretsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         ArrayList<Arret> data = new ArrayList<Arret>();
         Arret tmp;
+
+        ArrayList<NumLigne> lignes = new ArrayList<NumLigne>();
+        NumLigne ligne = new NumLigne(), ligne2 = new NumLigne();
+        ligne.setNumLigne("51");
+        ligne2.setNumLigne("28");
+        lignes.add(ligne);
+        lignes.add(ligne2);
+
         for (int i = 0; i < 10; i++) {
             tmp = new Arret();
             tmp.setLibelle("Libelle: " + i);
             tmp.setCodeLieu("CodeLieu");
+            tmp.setDistance("200m");
+            tmp.setLigne(lignes);
             data.add(tmp);
         }
 

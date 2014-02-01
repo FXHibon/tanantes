@@ -3,6 +3,7 @@ package org.maurange.formation.licpro.rest;
 import java.util.List;
 
 public class Arret {
+
     private String codeLieu;
     private String libelle;
     private String distance;

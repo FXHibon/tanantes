@@ -59,19 +59,20 @@ public class ArretAdapter extends BaseAdapter {
 
 //		Log.d(LOG_TAG, "getView() - uiArretDistance: " + uiArretDistance);
 
-        ((TextView) p_oConvertView.findViewById(R.id.arret_item_nom)).setText(getItem(p_iPosition).getLibelle());
-        ((TextView) p_oConvertView.findViewById(R.id.arret_item_distance)).setText(getItem(p_iPosition).getDistance());
+        ((TextView) p_oConvertView.findViewById(R.id.arret_item_nom)).setText(mArret.getLibelle());
+        ((TextView) p_oConvertView.findViewById(R.id.arret_item_distance)).setText(mArret.getDistance());
 
         LinearLayout llArrets;
         llArrets = (LinearLayout) p_oConvertView.findViewById(R.id.arret_item_arrets);
+        llArrets.removeAllViews();
 
-        for (NumLigne ligne: getItem(p_iPosition).getLigne()) {
-            TextView tvLigne = new TextView(mContext);
-            tvLigne.setText(ligne.getNumLigne());
-            llArrets.addView(tvLigne);
+        ImageView imageLigne;
+
+        for (NumLigne ligne: mArret.getLigne()) {
+            imageLigne = (ImageView) inflater.inflate(R.layout.ligne_item, null);
+            imageLigne.setImageResource((mContext.getResources().getIdentifier("l_" + ligne.getNumLigne(), "drawable", mContext.getPackageName())));
+            llArrets.addView(imageLigne);
         }
-
-        //TODO mapper vos vues
 
         return p_oConvertView;
     }
