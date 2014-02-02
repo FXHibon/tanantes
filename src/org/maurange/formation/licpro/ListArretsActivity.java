@@ -25,28 +25,9 @@ public class ListArretsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         ArrayList<Arret> data = new ArrayList<Arret>();
-        Arret tmp;
-
-        ArrayList<NumLigne> lignes = new ArrayList<NumLigne>();
-        NumLigne ligne = new NumLigne(), ligne2 = new NumLigne();
-        ligne.setNumLigne("51");
-        ligne2.setNumLigne("28");
-        lignes.add(ligne);
-        lignes.add(ligne2);
-
-        for (int i = 0; i < 10; i++) {
-            tmp = new Arret();
-            tmp.setLibelle("Libelle: " + i);
-            tmp.setCodeLieu("CodeLieu");
-            tmp.setDistance("200m");
-            tmp.setLigne(lignes);
-            data.add(tmp);
-        }
-
-        ArretAdapter arretAdapter = new ArretAdapter(this, data);
-        setListAdapter(arretAdapter);
-
-        //TODO
+        ArretRestMethod rest = new ArretRestMethod(this);
+        GetListArretTask task = new GetListArretTask(this);
+        task.execute(47.2271839, -1.569467);
 
     }
 
