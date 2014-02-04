@@ -14,12 +14,11 @@ import org.maurange.formation.licpro.rest.ListArret;
 public class GetListArretTask extends AsyncTask<Object, Void, ListArret> {
 
     private ListArretsActivity activity;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     public GetListArretTask(ListArretsActivity context) {
         activity = context;
     }
-
 
     @Override
     protected ListArret doInBackground(Object... objects) {
@@ -40,7 +39,7 @@ public class GetListArretTask extends AsyncTask<Object, Void, ListArret> {
     @Override
     protected void onPostExecute(ListArret aListArret) {
         super.onPostExecute(aListArret);
-        progressDialog.dismiss();
         activity.setListAdapter(new ArretAdapter(activity, aListArret));
+        progressDialog.dismiss();
     }
 }

@@ -1,5 +1,6 @@
 package org.maurange.formation.licpro;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.maurange.formation.licpro.rest.*;
@@ -14,23 +15,52 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 
-public class ListArretsActivity extends ListActivity {
+public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuItemClickListener {
 
     private static String LOG_TAG = "ListArretsActivity";
+    private GetListArretTask task;
+    private ArretRestMethod rest;
+    private LocationManager locationManager;
+    private Location location;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<Arret> data = new ArrayList<Arret>();
-        ArretRestMethod rest = new ArretRestMethod(this);
-        GetListArretTask task = new GetListArretTask(this);
-        task.execute(47.2271839, -1.569467);
+        rest = new ArretRestMethod(this);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        update();
+
 
     }
 
+    private void update() {
+        task = new GetListArretTask(this);
+        /*
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (location == null) {
+            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+
+
+        task.execute(location.getLatitude(), location.getLongitude());*/
+
+        // Test data
+        task.execute(47.2271839, -1.569467);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        menu.getItem(0).setOnMenuItemClickListener(this);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onResume() {
@@ -47,4 +77,11 @@ public class ListArretsActivity extends ListActivity {
         //TODO
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.butLocation) {
+            update();
+        }
+        return false;
+    }
 }

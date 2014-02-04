@@ -25,11 +25,12 @@
 
         <LinearLayout
             android:id="@+id/arret_item_arrets"
-            android:layout_margin="@dimen/marginLigneImage"
+            android:layout_gravity="left"
+            android:gravity="left"
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="@dimen/heightLigneImage"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
 
         <TextView
