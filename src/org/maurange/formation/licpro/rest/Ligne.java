@@ -14,6 +14,17 @@ public class Ligne {
         return _ID;
     }
 
+    @Override
+    public String toString() {
+        return "Ligne{" +
+                "_ID='" + _ID + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", longName='" + longName + '\'' +
+                ", description='" + description + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
     /**
      * @param _ID the _ID to set
      */

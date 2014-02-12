@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Application strings -->
+
     <string name="app_name">TPLicencePro</string>
+    <string name="ligneIconeDesc">Image ligne</string>
+
+
+    <!-- Web request schemes -->
+
     <string name="arret_rest_url">https://www.tan.fr/ewp/arrets.json?output={format}&amp;latitude={latitude}&amp;longitude={longitude}</string>
+    <!--
+        latitude
+        longitude
+    -->
+
+    <string name="temps_attente_arret_rest_url">https://open.tan.fr/ewp/tempsattente.json/{format}</string>
+    <!--
+        codeLieu : Code du lieu retourné par le webservice de liste des arrêts.
+    -->
+
+
+    <string name="horaires_arret_rest_url">https://open.tan.fr/ewp/horairesarret.json/{format}/{format}/{format}</string>
+    <!--
+        codeArret : code de l’arrêt issu du webservice “Temps d’attente à une zone d’arrêt”
+        numLigne : numéro de la ligne
+        sens : sens de la ligne
+     -->
 
 </resources>

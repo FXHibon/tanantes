@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 
 
 public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuItemClickListener {
@@ -57,8 +59,8 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        menu.getItem(0).setOnMenuItemClickListener(this);
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        menu.getItem(0).setOnMenuItemClickListener(this);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -79,9 +81,14 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.butLocation) {
-            update();
-        }
+
         return false;
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Log.i(LOG_TAG, ((Arret) l.getAdapter().getItem(position)).toString());
     }
 }

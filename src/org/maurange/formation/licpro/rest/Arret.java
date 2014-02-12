@@ -65,5 +65,13 @@ public class Arret {
         this.ligne = ligne;
     }
 
-
+    @Override
+    public String toString() {
+        return "Arret{" +
+                "codeLieu='" + codeLieu + '\'' +
+                ", libelle='" + libelle + '\'' +
+                ", distance='" + distance + '\'' +
+                ", ligne=" + ligne.toString() +
+                '}';
+    }
 }

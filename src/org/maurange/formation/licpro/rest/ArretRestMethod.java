@@ -58,6 +58,8 @@ public class ArretRestMethod {
             ResponseEntity<ListArret> responseEntity = restTemplate.exchange(
                     url, HttpMethod.GET, requestEntity, ListArret.class, "json", latitude, longitude);
 
+            Log.i(LOG_TAG, url);
+
             Log.d(LOG_TAG, "nb arrets: " + responseEntity.getBody().size());
             arrets.addAll(responseEntity.getBody());
         } catch (RestClientException e) {
