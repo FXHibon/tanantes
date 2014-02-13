@@ -1,6 +1,5 @@
 package org.maurange.formation.licpro.rest;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,22 +17,24 @@ import org.springframework.web.client.RestTemplate;
 import android.content.Context;
 import android.util.Log;
 
-
-public class ArretRestMethod {
-    private static String LOG_TAG = "ArretRestMethod";
+/**
+ * Created by François-Xavier on 13/02/14.
+ */
+public class AttenteRestMethod {
+    private static String LOG_TAG = "AttenteRestMethod";
     Context mContext = null;
 
-    public ArretRestMethod(Context context) {
+    public AttenteRestMethod(Context context) {
         mContext = context.getApplicationContext();
     }
 
 
-    public ListArret getArretsRest(double latitude, double longitude) {
+    public ListAttente getAttenteRest(String codeLieu) {
 
         // The URL for making the GET request
-        final String url = mContext.getString(R.string.arret_rest_url);
+        final String url = mContext.getString(R.string.temps_attente_arret_rest_url);
 
-        Log.d(LOG_TAG, "Invoke url " + url + " with params : " + latitude + ", " + longitude);
+        Log.d(LOG_TAG, "Invoke url " + url + " with params : " + codeLieu);
 
         // Set the Accept header for "application/json"
         HttpHeaders requestHeaders = new HttpHeaders();
@@ -50,20 +51,20 @@ public class ArretRestMethod {
         restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
 
         // Perform the HTTP GET request
-        ListArret arrets = new ListArret();
+        ListAttente attentes = new ListAttente();
         try {
-            ResponseEntity<ListArret> responseEntity = restTemplate.exchange(
-                    url, HttpMethod.GET, requestEntity, ListArret.class, "json", latitude, longitude);
+            ResponseEntity<ListAttente> responseEntity = restTemplate.exchange(
+                    url, HttpMethod.GET, requestEntity, ListAttente.class, codeLieu);
 
             Log.i(LOG_TAG, url);
 
             Log.d(LOG_TAG, "nb arrets: " + responseEntity.getBody().size());
-            arrets.addAll(responseEntity.getBody());
+            attentes.addAll(responseEntity.getBody());
         } catch (RestClientException e) {
-            Log.e(LOG_TAG, "RestException dans le chargement des donn�es serveur", e);
+            Log.e(LOG_TAG, "RestException dans le chargement des données serveur", e);
         }
 
-        return arrets;
+        return attentes;
     }
 
 }

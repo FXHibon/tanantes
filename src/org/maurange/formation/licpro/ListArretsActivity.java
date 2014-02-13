@@ -1,17 +1,12 @@
 package org.maurange.formation.licpro;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import org.maurange.formation.licpro.rest.*;
 
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,8 +18,8 @@ import android.widget.ListView;
 public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuItemClickListener {
 
     private static String LOG_TAG = "ListArretsActivity";
-    private GetListArretTask task;
-    private ArretRestMethod rest;
+    private GetListArretTask getListArretTask;
+    private GetAttenteTask getAttenteTask;
     private LocationManager locationManager;
     private Location location;
 
@@ -32,18 +27,12 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        rest = new ArretRestMethod(this);
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
         update();
-
-
     }
 
     private void update() {
-        task = new GetListArretTask(this);
+        getListArretTask = new GetListArretTask(this);
         /*
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location == null) {
@@ -51,10 +40,10 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
         }
 
 
-        task.execute(location.getLatitude(), location.getLongitude());*/
+        getListArretTask.execute(location.getLatitude(), location.getLongitude());*/
 
         // Test data
-        task.execute(47.2271839, -1.569467);
+        getListArretTask.execute(47.2271839, -1.569467);
     }
 
     @Override
@@ -88,7 +77,8 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
-        Log.i(LOG_TAG, ((Arret) l.getAdapter().getItem(position)).toString());
+        Arret currentArret = (Arret) l.getAdapter().getItem(position);
+        getAttenteTask = new GetAttenteTask(this, currentArret.getCodeLieu());
+        getAttenteTask.execute();
     }
 }
