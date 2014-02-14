@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.maurange.formation.licpro.rest.Attente;
 import org.maurange.formation.licpro.rest.AttenteRestMethod;
 import org.maurange.formation.licpro.rest.ListAttente;
 
@@ -27,7 +28,6 @@ public class GetAttenteTask extends AsyncTask<Object, Void, ListAttente> {
     @Override
     protected ListAttente doInBackground(Object... objects) {
         ListAttente attentes = attenteRestMethod.getAttenteRest(mCodeLieu);
-        Log.i(LOG_TAG, attentes.toString());
         return attentes;
     }
 
@@ -39,5 +39,6 @@ public class GetAttenteTask extends AsyncTask<Object, Void, ListAttente> {
     @Override
     protected void onPostExecute(ListAttente attentes) {
         super.onPostExecute(attentes);
+        ((ListArretsActivity) mContext).handleTempsAttente(attentes);
     }
 }

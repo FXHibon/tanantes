@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 
@@ -22,11 +23,13 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
     private GetAttenteTask getAttenteTask;
     private LocationManager locationManager;
     private Location location;
+    private int mActivatedItemPosition = AbsListView.INVALID_POSITION;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getListView().setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         update();
     }
@@ -68,6 +71,7 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
         //TODO
     }
 
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
 
@@ -77,8 +81,34 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        mActivatedItemPosition = position;
         Arret currentArret = (Arret) l.getAdapter().getItem(position);
         getAttenteTask = new GetAttenteTask(this, currentArret.getCodeLieu());
         getAttenteTask.execute();
+    }
+
+    /**
+     * @param attentes
+     */
+    public void handleTempsAttente(ListAttente attentes) {
+        Arret currentArret = getActivatedItem();
+        for (Attente a : attentes) {
+            try {
+                Log.i(LOG_TAG, "checking " + a.getArret().getCodeLieu() + " == " + currentArret.getCodeLieu());
+                if (a.getArret().getCodeLieu().equals(currentArret)) {
+                    Log.i(LOG_TAG, "found" + a.getTemps());
+                }
+            } catch (NullPointerException e) {
+                continue;
+            }
+        }
+    }
+
+    protected Arret getActivatedItem() {
+        if (mActivatedItemPosition != AbsListView.INVALID_POSITION) {
+            return (Arret) getListAdapter().getItem(mActivatedItemPosition);
+        } else {
+            return null;
+        }
     }
 }
