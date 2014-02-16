@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Arret {
 
+
+    private String codeArret;
     private String codeLieu;
     private String libelle;
     private String distance;
@@ -73,5 +75,13 @@ public class Arret {
                 ", distance='" + distance + '\'' +
                 ", ligne=" + ligne.toString() +
                 '}';
+    }
+
+    public String getCodeArret() {
+        return codeArret;
+    }
+
+    public void setCodeArret(String codeArret) {
+        this.codeArret = codeArret;
     }
 }

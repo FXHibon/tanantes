@@ -1,8 +1,10 @@
 package org.maurange.formation.licpro;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import org.maurange.formation.licpro.rest.ArretRestMethod;
 import org.maurange.formation.licpro.rest.ListArret;
@@ -41,5 +43,13 @@ public class GetListArretTask extends AsyncTask<Object, Void, ListArret> {
         super.onPostExecute(aListArret);
         activity.setListAdapter(new ArretAdapter(activity, aListArret));
         progressDialog.dismiss();
+
+        if (aListArret.size() == 0) {
+            Dialog d = new Dialog(activity);
+            TextView tv = new TextView(activity);
+            tv.setText("Pas d'arrêts trouvés dans le coin");
+            d.setContentView(tv);
+            d.show();
+        }
     }
 }

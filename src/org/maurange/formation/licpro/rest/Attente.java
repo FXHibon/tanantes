@@ -9,8 +9,8 @@ public class Attente {
     private String terminus;
     private boolean infotrafic;
     private String temps;
-    private Ligne ligne;
     private Arret arret;
+    private NumLigne ligne;
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public class Attente {
                 ", infotrafic=" + infotrafic +
                 ", temps='" + temps + '\'' +
                 ", ligne=" + ligne +
-                ", arret=" + arret +
+                ", arret=" + arret.getCodeArret() +
                 '}';
     }
 
@@ -56,19 +56,19 @@ public class Attente {
         this.temps = temps;
     }
 
-    public Ligne getLigne() {
-        return ligne;
-    }
-
-    public void setLigne(Ligne ligne) {
-        this.ligne = ligne;
-    }
-
     public Arret getArret() {
         return arret;
     }
 
     public void setArret(Arret arret) {
         this.arret = arret;
+    }
+
+    public NumLigne getLigne() {
+        return ligne;
+    }
+
+    public void setLigne(NumLigne ligne) {
+        this.ligne = ligne;
     }
 }

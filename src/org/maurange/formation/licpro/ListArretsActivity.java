@@ -94,9 +94,8 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
         Arret currentArret = getActivatedItem();
         for (Attente a : attentes) {
             try {
-                Log.i(LOG_TAG, "checking " + a.getArret().getCodeLieu() + " == " + currentArret.getCodeLieu());
-                if (a.getArret().getCodeLieu().equals(currentArret)) {
-                    Log.i(LOG_TAG, "found" + a.getTemps());
+                if (a.getArret().getCodeArret().contains(currentArret.getCodeLieu())) {
+                    Log.i(LOG_TAG, "found" + a);
                 }
             } catch (NullPointerException e) {
                 continue;

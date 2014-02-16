@@ -4,6 +4,9 @@
     <!-- Application strings -->
 
     <string name="app_name">TPLicencePro</string>
+    <string name="title_liste_arret">Liste des arrêts proches</string>
+    <string name="title_attentes">Horaires</string>
+
     <string name="ligneIconeDesc">Image ligne</string>
 
 

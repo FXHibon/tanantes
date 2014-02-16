@@ -23,8 +23,8 @@
 
         <activity
             android:name="org.maurange.formation.licpro.ListArretsActivity"
-            android:label="@string/app_name">
-            <intent-filter>
+            android:label="@string/title_liste_arret">
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

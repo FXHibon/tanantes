@@ -47,17 +47,10 @@ public class ArretAdapter extends BaseAdapter {
     @Override
     public View getView(int p_iPosition, View p_oConvertView, ViewGroup p_oParentView) {
 
-//		Log.d(LOG_TAG, "getView() - position: " + p_iPosition);
-
         if (p_oConvertView == null) {
             p_oConvertView = inflater.inflate(R.layout.arret_item, null);
         }
         Arret mArret = this.getItem(p_iPosition);
-//		Log.d(LOG_TAG, "getView() - mArret: " + mArret);
-//		Log.d(LOG_TAG, "getView() - mArret: " + mArret.getLibelle());
-//		Log.d(LOG_TAG, "getView() - mArret: " + mArret.getDistance());
-
-//		Log.d(LOG_TAG, "getView() - uiArretDistance: " + uiArretDistance);
 
         ((TextView) p_oConvertView.findViewById(R.id.arret_item_nom)).setText(mArret.getLibelle());
         ((TextView) p_oConvertView.findViewById(R.id.arret_item_distance)).setText(mArret.getDistance());
@@ -68,7 +61,7 @@ public class ArretAdapter extends BaseAdapter {
 
         ImageView imageLigne;
 
-        for (NumLigne ligne: mArret.getLigne()) {
+        for (NumLigne ligne : mArret.getLigne()) {
             imageLigne = (ImageView) inflater.inflate(R.layout.ligne_item, null);
             imageLigne.setImageResource((mContext.getResources().getIdentifier("l_" + ligne.getNumLigne(), "drawable", mContext.getPackageName())));
             llArrets.addView(imageLigne);
