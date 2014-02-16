@@ -58,8 +58,8 @@ public class AttenteAdapter extends BaseAdapter {
         TextView ligne = (TextView) view.findViewById(R.id.ligne);
         TextView tempsAttente = (TextView) view.findViewById(R.id.temps_attente);
 
-        terminus.setText(a.getTerminus());
-        ligne.setText(a.getLigne().getNumLigne());
+        terminus.setText("Terminus: " + a.getTerminus());
+        ligne.setText("Ligne: " + a.getLigne().getNumLigne());
         tempsAttente.setText(a.getTemps());
 
         return view;

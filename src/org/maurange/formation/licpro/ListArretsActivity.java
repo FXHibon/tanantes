@@ -3,6 +3,7 @@ package org.maurange.formation.licpro;
 import org.maurange.formation.licpro.rest.*;
 
 
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.location.Location;
@@ -91,16 +92,10 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
      * @param attentes
      */
     public void handleTempsAttente(ListAttente attentes) {
-        Arret currentArret = getActivatedItem();
-        for (Attente a : attentes) {
-            try {
-                if (a.getArret().getCodeArret().contains(currentArret.getCodeLieu())) {
-                    Log.i(LOG_TAG, "found" + a);
-                }
-            } catch (NullPointerException e) {
-                continue;
-            }
-        }
+        // Afficher le Dialog
+        Dialog dialog = new DialogListeAttente(this, attentes);
+        dialog.show();
+
     }
 
     protected Arret getActivatedItem() {

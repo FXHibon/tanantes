@@ -4,4 +4,5 @@
     <dimen name="heightLigneImage">20dp</dimen>
     <dimen name="widthtLigneImage">10dp</dimen>
     <dimen name="marginDefault">10dp</dimen>
+    <dimen name="marginStrong">25dp</dimen>
 </resources>
