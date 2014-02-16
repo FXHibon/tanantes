@@ -8,6 +8,7 @@
     <string name="title_attentes">Horaires</string>
 
     <string name="ligneIconeDesc">Image ligne</string>
+    <string name="message_chargement_attentes">Chargement des temps d\'attentes</string>
 
 
     <!-- Web request schemes -->

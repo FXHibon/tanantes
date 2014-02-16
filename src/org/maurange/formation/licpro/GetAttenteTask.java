@@ -9,6 +9,7 @@ import org.maurange.formation.licpro.rest.AttenteRestMethod;
 import org.maurange.formation.licpro.rest.ListAttente;
 
 /**
+ * Tâche asynchrone pour obtenir la liste des attentes pour un lieu donné
  * Created by François-Xavier on 13/02/14.
  */
 public class GetAttenteTask extends AsyncTask<Object, Void, ListAttente> {
@@ -18,6 +19,12 @@ public class GetAttenteTask extends AsyncTask<Object, Void, ListAttente> {
     private AttenteRestMethod attenteRestMethod;
     private String LOG_TAG = "GetAttenteTask";
 
+    /**
+     * Construis la tâche avec le codeLieu donné
+     *
+     * @param context
+     * @param codeLieu
+     */
     public GetAttenteTask(Context context, String codeLieu) {
         super();
         this.mCodeLieu = codeLieu;
@@ -25,6 +32,11 @@ public class GetAttenteTask extends AsyncTask<Object, Void, ListAttente> {
         attenteRestMethod = new AttenteRestMethod(mContext);
     }
 
+    /**
+     * Lanche l'exécution de la tâche
+     * @param objects
+     * @return
+     */
     @Override
     protected ListAttente doInBackground(Object... objects) {
         ListAttente attentes = attenteRestMethod.getAttenteRest(mCodeLieu);
@@ -36,6 +48,10 @@ public class GetAttenteTask extends AsyncTask<Object, Void, ListAttente> {
         super.onPreExecute();
     }
 
+    /**
+     * Callback pour demander à la liste d'arrêt de traiter la liste d'attente trouvée
+     * @param attentes
+     */
     @Override
     protected void onPostExecute(ListAttente attentes) {
         super.onPostExecute(attentes);

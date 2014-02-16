@@ -23,6 +23,12 @@ public class AttenteAdapter extends BaseAdapter {
     private List<Attente> mListAttente;
     private LayoutInflater inflater;
 
+    /**
+     * Création de l'adapter
+     *
+     * @param p_oContext     Contexte dans lequel sera utilisé l'adapter
+     * @param p_oListAttente Liste d'attentes
+     */
     public AttenteAdapter(Context p_oContext, List<Attente> p_oListAttente) {
         super();
         mContext = p_oContext;

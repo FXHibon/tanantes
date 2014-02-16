@@ -25,8 +25,14 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
     private LocationManager locationManager;
     private Location location;
     private int mActivatedItemPosition = AbsListView.INVALID_POSITION;
+    private DialogListeAttente dialog;
 
 
+    /**
+     * Création de l'activité et rafraichissement des données
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,33 +41,31 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
         update();
     }
 
+    /**
+     * Rafraichi la liste des arrêts en fonction de la position
+     */
     private void update() {
         getListArretTask = new GetListArretTask(this);
-        /*
+
+        // On va cherche le gestionaire de localisation
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location == null) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
 
-
-        getListArretTask.execute(location.getLatitude(), location.getLongitude());*/
-
-        // Test data
-        getListArretTask.execute(47.2271839, -1.569467);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        menu.getItem(0).setOnMenuItemClickListener(this);
-        return super.onCreateOptionsMenu(menu);
+        if (location != null) {
+            getListArretTask.execute(location.getLatitude(), location.getLongitude());
+        } else {
+            // Testing data
+            getListArretTask.execute(47.2271839, -1.569467);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(LOG_TAG, "enregistrement des listeners");
-        //TODO
+        // TODO
     }
 
     //arret des updates
@@ -79,25 +83,41 @@ public class ListArretsActivity extends ListActivity implements MenuItem.OnMenuI
         return false;
     }
 
+    /**
+     * Gestion du click sur un arrêt
+     * @param l la ListView
+     * @param v La vue cliqué
+     * @param position La position de la vue cliqué
+     * @param id L'identifiant de la vue cliquée
+     */
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         mActivatedItemPosition = position;
         Arret currentArret = (Arret) l.getAdapter().getItem(position);
+
+        // On affiche le Dialog qui permettra de visualiser les temps d'attente
+        dialog = new DialogListeAttente(this);
+        dialog.show();
+
+        // On va chercher les données
         getAttenteTask = new GetAttenteTask(this, currentArret.getCodeLieu());
         getAttenteTask.execute();
     }
 
     /**
+     * Création du dialog pour afficher les temps d'attente
      * @param attentes
      */
     public void handleTempsAttente(ListAttente attentes) {
-        // Afficher le Dialog
-        Dialog dialog = new DialogListeAttente(this, attentes);
-        dialog.show();
-
+        // Lorsque les attentes on été trouvées, on les affiche dans le dialog créé dans la méthode précédente
+        dialog.setAdapter(attentes);
     }
 
+    /**
+     * Renvois l'arrêt courant (le dernier sur lequel on a cliqué)
+     * @return Arret courant
+     */
     protected Arret getActivatedItem() {
         if (mActivatedItemPosition != AbsListView.INVALID_POSITION) {
             return (Arret) getListAdapter().getItem(mActivatedItemPosition);
